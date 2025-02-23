@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symptom Analyzer and Disease Predictor</title>
+    <link rel="stylesheet" href="cattle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Symptom Analyzer</h1>
+            <p>Your health companion</p> 
+        </div>
+    </header>
+
+    <main>
+        <section id="symptom-input">
+            <div class="container">
+                <h2>Describe Your Pet's Symptoms</h2>
+                <div class="SearchBar">
+                <label for="search">Search Symptom:-</label>
+                <input type="text" id="search" placeholder="Search Symptoms...">
+                </div>
+                <div id="Form">
+                    
+                </div>
+                <button>Analyze</button>
+            </div>
+        </section>
+
+        <section id="results">
+            <div class="container">
+                <h2>Possible Conditions</h2>
+                <div id="predictions">
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="cattle.js"></script>
+    <script>
+        const searchInput = document.getElementById('search');
+        const symptomCheckboxes = document.getElementById('Form');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            // Get all labels (which contain the checkboxes and text)
+            const labels = symptomCheckboxes.querySelectorAll('label');
+
+            labels.forEach(label => {
+                const symptomText = label.textContent.trim().toLowerCase(); // Extract and clean the symptom text
+
+                if (symptomText.includes(searchTerm)) {
+                    label.style.display = 'block'; // Show matching symptoms
+                } else {
+                    label.style.display = 'none'; // Hide non-matching symptoms
+                }
+            });
+        });
+    </script>
+</body>
+</html>

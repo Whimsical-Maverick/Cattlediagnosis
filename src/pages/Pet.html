@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Type Identifier</title>
+    <link rel="stylesheet" href="pet.css">
+</head>
+<style>
+    body {
+        font-family: sans-serif;
+        background-color: #fafafa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    .radio-group {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .radio-group label {
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    .radio-group input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    button {
+        background-color: #2929f8;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #2929f8;
+    }
+
+    #result {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 400px) {
+        .radio-group {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .radio-group label {
+            margin: 5px 0;
+            display: block;
+        }
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <h2>Pet Type Identifier</h2>
+
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="pet_type" value="cattle"> Cattle
+            </label>
+            <label>
+                <input type="radio" name="pet_type" value="dog"> Dog
+            </label>
+        </div>
+
+        <button onclick="identifyPet()">Identify</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function identifyPet() {
+            //Stores the value of the selected radion button with name as pet_type in the selectedType variable
+            //if nothing is stored there it return truthy (ie non null) and if its null then it returns falsy
+            const selectedType = document.querySelector('input[name="pet_type"]:checked');
+            const resultDiv = document.getElementById('result');
+
+            if (selectedType.value == 'cattle') {
+                window.location.href = 'cattle.html'
+            } else {
+                window.location.href = 'dog.html'
+            }
+        }
+    </script>
+</body>
+
+</html>

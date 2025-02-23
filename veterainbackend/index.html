@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    const jsArray = [0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0,
+        0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1];
+
+    // Convert to JSON string for easy transfer
+    const dataToSend = JSON.stringify({ inputArray: jsArray });
+
+    // Send the data to your Python backend (using fetch or XMLHttpRequest)
+    fetch('/predict', {  // Replace '/predict' with your backend endpoint
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: dataToSend
+    })
+        .then(response => response.json())
+        .then(result => {
+            // Process the prediction result received from the backend
+            console.log('Prediction:', result.prediction);  // Example
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+</script>
+
+</html>

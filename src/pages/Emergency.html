@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(248, 248, 248)
+        }
+
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3
+        }
+
+        .response {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .conversation-history {
+            margin-top: 20px;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd
+        }
+
+        .conversation-history h3 {
+            margin-top: 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Emergency Care with AI</h1>
+        <textarea id="inputText" placeholder="Enter your Issue"></textarea>
+        <br><br>
+        <button id="submitBtn">Submit</button>
+        <div class="response" id="response"> </div>
+        <div class="conversation-history" id="conversationHistory">
+            <h3>Conversation History:</h3>
+            <div id="historyContent"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', async function () {
+            const userInput = document.getElementById('inputText').value;
+            const responseElement = document.getElementById('response'); // Get the response DIV
+            const historyContent = document.getElementById('historyContent');
+
+            historyContent.innerHTML += <p><strong>Patient:</strong> ${userInput}</p>;
+
+            const apiKey = 'AIzaSyDf1lqHKCR15g35MQJtKihxd2qVPm0sukk'; // *REPLACE WITH YOUR API KEY*
+
+            const prompt = `You are an AI-powered emergency animal care bot.  Respond to the following patient input as if you are providing initial guidance in an emergency situation. Be concise, prioritize safety, and if necessary, always advise seeking immediate professional medical attention. Do not offer diagnoses or medical advice. Focus on immediate actions and next steps. Format your responses as a bulleted list where applicable.
+
+                        Patient Input: ${userInput}`;
+
+            try {
+                const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "contents": [{
+                            "parts": [{
+                                "text": prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!apiResponse.ok) {
+                    const errorData = await apiResponse.json();
+                    throw new Error(`API Error: ${apiResponse.status} - ${errorData.error.message}`);
+                }
+
+                const data = await apiResponse.json();
+
+                if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) {
+                    const aiResponse = data.candidates[0].content.parts[0].text;
+
+                    // Format as list (handling potential variations in Gemini's output):
+                    let formattedResponse = "";
+                    if (aiResponse.includes('\n')) {  // Check if there are newlines (likely a list)
+                        formattedResponse = `<ul>${aiResponse.split('\n').filter(line => line.trim() !== "").map(line => {
+                            const trimmedLine = line.replace(/^[-•]\s*/, "").trim(); //remove bullet or hypen from beginning of the line
+                            return <li>${trimmedLine}</li>;
+                        }).join('')}</ul>`;
+                    } else { // Handle single-line responses
+                        formattedResponse = <p>${aiResponse}</p>;
+                    }
+
+                    responseElement.innerHTML = formattedResponse; // Set the HTML of the response DIV
+                    historyContent.innerHTML += <p><strong>AI:</strong> ${aiResponse}</p>;
+
+                } else {
+                    throw new Error("Invalid response format from API.");
+                }
+
+            } catch (error) {
+                responseElement.innerHTML = <p>Error: ${error.message}</p>; // Display error in the response DIV
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+
+</html>

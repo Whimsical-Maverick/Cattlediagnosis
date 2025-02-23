@@ -1,0 +1,108 @@
+/* Basic styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8; /* Light background */
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: #007bff; /* Blue header */
+    color: white;
+    padding: 20px 0;
+    text-align: center; /* Center header content */
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+/* Main content sections */
+main section {
+    padding: 40px 0;
+}
+
+#symptom-input {
+    background-color: white;
+}
+
+#results {
+    background-color: #f2f2f2; /* Light gray background for results */
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label
+{
+    display:block;
+    margin:10px
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input{
+    display:block;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Results display */
+#predictions {
+    /* Style your results here */
+}
+
+.SearchBar
+{
+    display:flex;
+    justify-content:flex-start;
+    align-items: center;
+    gap:5px;
+}
+
+.SearchBar Input
+{
+    padding:10px;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Responsive design (example) */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+}

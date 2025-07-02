@@ -31,13 +31,13 @@
 
 ## 🔧 Tech Stack
 
-| Layer         | Technologies Used                             |
+| Layer         | Technologies Used                              |
 |---------------|------------------------------------------------|
-| Frontend      | React (UI in `src/`), HTML, CSS                |
+| Frontend      | React, HTML, CSS                               |
 | API Server    | Node.js (Appointment scheduling, Auth, Chat)   |
-| AI Engine     | Flask (ML + Rule-based logic in `veterainbackend/`) |
+| AI Engine     | Flask                                          |
 | ML Model      | Random Forest Classifier (Scikit-learn)        |
-| Database      | MongoDB / SQLite                               |
+| Database      | MongoDB                                        |
 
 ---
 

@@ -1,6 +1,6 @@
 # 🐾 PetVet – AI-Powered Pet Health & First Aid Assistant
 
-**PetVet** is a full-stack, AI-enabled web platform that empowers pet owners with **instant first aid guidance**, **disease prediction**, and **end-to-end hospital support**. It combines ML, NLP, and real-time backend services to create a reliable health assistant for your furry companions.
+**PetVet** is a full-stack, AI-enabled web platform that empowers pet owners with **instant first aid guidance**, **disease prediction**, and **end-to-end hospital support**. It combines Machine Learning and real-time backend services to create a reliable health assistant for your furry companions.
 
 ---
 
@@ -42,6 +42,7 @@
 ---
 
 built by->
+<br>
 BHAVYA GAUR
 <br>
 ADITYA RAI

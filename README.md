@@ -41,8 +41,8 @@
 
 ---
 
-built by->
+Built By:
 <br>
-BHAVYA GAUR
+<a href='https://github.com/Whimsical-Maverick/'>BHAVYA GAUR</a>
 <br>
-ADITYA RAI
+<a href='https://github.com/raixyzaditya/'>ADITYA RAI</a>
